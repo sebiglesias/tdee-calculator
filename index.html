@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BNDBQP0W7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2BNDBQP0W7');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TDEE Calculator — Total Daily Energy Expenditure & Macro Plan</title>
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <meta name="description" content="Free and accurate TDEE Calculator (Total Daily Energy Expenditure). Discover your Basal Metabolic Rate (BMR), calorie deficit for weight loss, and customized daily protein, carb, and fat macros.">
+  <meta name="keywords" content="tdee calculator, calorie deficit calculator, bmr calculator, macro calculator, how many calories should i eat, maintenance calories calculator">
+  <link rel="canonical" href="https://sebiglesias.com.ar/tdee-calculator/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TDEE Calculator — Total Daily Energy Expenditure & Macros">
+  <meta property="og:description" content="Calculate your daily maintenance calories, BMR, and optimal macro split for fat loss or muscle gain.">
+  <meta property="og:url" content="https://sebiglesias.com.ar/tdee-calculator/">
+  <meta property="og:site_name" content="TDEE Calculator">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TDEE Calculator & Daily Macro Tracker">
+  <meta name="twitter:description" content="Accurately compute your calorie burn and macronutrients.">
+
+  <!-- Google AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-3381238987477190">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3381238987477190" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Structured Data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "TDEE Calculator & Macro Tracker",
+    "url": "https://sebiglesias.com.ar/tdee-calculator/",
+    "description": "Scientific calculation of Total Daily Energy Expenditure (TDEE), Basal Metabolic Rate (BMR), and custom macronutrient distributions.",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Sebastián Iglesias",
+      "url": "https://sebiglesias.com.ar"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is TDEE (Total Daily Energy Expenditure)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "TDEE stands for Total Daily Energy Expenditure. It represents the total number of calories your body burns in a 24-hour period by combining your Basal Metabolic Rate (BMR) with the thermic effect of food (TEF) and daily physical activity."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many calories should I eat to lose 1 pound per week?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One pound of body fat is roughly equivalent to 3,500 calories. Consuming a daily deficit of 500 calories below your maintenance TDEE (500 x 7 = 3,500 kcal) results in a steady and sustainable fat loss of approximately 1 lb (0.45 kg) per week without sacrificing lean muscle mass."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much daily protein do I need while cutting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "During a caloric deficit, research recommends consuming 0.8 to 1.0 grams of protein per pound of body weight (1.8 to 2.2g per kg) to preserve muscle tissue and enhance satiety."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which formula is more accurate: Mifflin-St Jeor or Harris-Benedict?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Mifflin-St Jeor formula is widely considered the gold standard by the Academy of Nutrition and Dietetics, predicting resting metabolic rate within 10% of measured values for most healthy adults."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="https://sebiglesias.com.ar/" class="back-link">
+        ← Back to sebiglesias.com.ar
+      </a>
+      <span style="font-size: 0.8rem; color: #64748b;">Mifflin-St Jeor Equation</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="header">
+      <div class="badge-tag">⚡ Health & Fitness</div>
+      <h1 class="title">TDEE Calculator</h1>
+      <p class="subtitle">Learn your exact maintenance calories, basal metabolic rate, and optimal daily protein, carb, and fat targets.</p>
+    </section>
+
+    <!-- Inputs Card -->
+    <section class="card" aria-label="Personal metrics">
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label">Units</label>
+          <div class="segmented-control" role="group">
+            <button type="button" class="segmented-btn unit-btn active" data-unit="imperial">Imperial (lbs / ft)</button>
+            <button type="button" class="segmented-btn unit-btn" data-unit="metric">Metric (kg / cm)</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Biological Sex</label>
+          <div class="segmented-control" role="group">
+            <button type="button" class="segmented-btn sex-btn active" data-sex="male">Male</button>
+            <button type="button" class="segmented-btn sex-btn" data-sex="female">Female</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="input-age" class="form-label">Age (years)</label>
+        <input type="number" id="input-age" class="form-input" min="14" max="95" value="28">
+      </div>
+
+      <!-- Imperial Inputs -->
+      <div id="inputs-imperial" class="grid-2">
+        <div class="form-group">
+          <label for="input-weight-lbs" class="form-label">Current Weight (lbs)</label>
+          <input type="number" id="input-weight-lbs" class="form-input" min="60" max="600" value="165">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Height (feet & inches)</label>
+          <div class="height-imperial-row">
+            <input type="number" id="input-height-ft" class="form-input" min="3" max="7" value="5" placeholder="ft">
+            <input type="number" id="input-height-in" class="form-input" min="0" max="11" value="10" placeholder="in">
+          </div>
+        </div>
+      </div>
+
+      <!-- Metric Inputs -->
+      <div id="inputs-metric" class="grid-2" style="display: none;">
+        <div class="form-group">
+          <label for="input-weight-kg" class="form-label">Current Weight (kg)</label>
+          <input type="number" id="input-weight-kg" class="form-input" min="30" max="260" value="75">
+        </div>
+        <div class="form-group">
+          <label for="input-height-cm" class="form-label">Height (cm)</label>
+          <input type="number" id="input-height-cm" class="form-input" min="100" max="240" value="178">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="select-activity" class="form-label">Activity Level</label>
+        <select id="select-activity" class="form-select">
+          <option value="1.2">Sedentary (desk job, little or no exercise)</option>
+          <option value="1.375">Light Exercise (1-3 days per week)</option>
+          <option value="1.55" selected>Moderate Exercise (3-5 days per week)</option>
+          <option value="1.725">Heavy Exercise (6-7 days intense workouts)</option>
+          <option value="1.9">Athlete / Two-a-day training</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Primary Goal</label>
+        <div class="goals-grid" role="group">
+          <div class="goal-card active" data-delta="-350">
+            <span class="icon">📉</span>
+            <div class="title">Moderate Deficit</div>
+            <div class="delta">-350 kcal/day</div>
+          </div>
+          <div class="goal-card" data-delta="-500">
+            <span class="icon">⚡</span>
+            <div class="title">Fast Fat Loss</div>
+            <div class="delta">-500 kcal/day</div>
+          </div>
+          <div class="goal-card" data-delta="0">
+            <span class="icon">⚖️</span>
+            <div class="title">Maintenance</div>
+            <div class="delta">0 kcal</div>
+          </div>
+          <div class="goal-card" data-delta="250">
+            <span class="icon">💪</span>
+            <div class="title">Lean Bulk</div>
+            <div class="delta">+250 kcal/day</div>
+          </div>
+          <div class="goal-card" data-delta="500">
+            <span class="icon">🚀</span>
+            <div class="title">Aggressive Mass</div>
+            <div class="delta">+500 kcal/day</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="select-formula" class="form-label" style="font-size: 0.8rem; color: #64748b;">Estimation Formula</label>
+        <select id="select-formula" class="form-select" style="padding: 0.5rem; font-size: 0.85rem;">
+          <option value="mifflin" selected>Mifflin-St Jeor (Recommended by Academy of Nutrition)</option>
+          <option value="harris">Revised Harris-Benedict</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Main Results Hero -->
+    <section class="result-hero" aria-live="polite">
+      <div class="result-target-label">Target Daily Calories</div>
+      <div id="res-target-calories" class="result-calories">2,150</div>
+      <div class="result-unit">calories / day for your goal</div>
+
+      <div class="result-stats-row">
+        <div class="stat-item">
+          <span class="label">Basal Metabolic Rate (BMR)</span>
+          <span id="res-bmr" class="val">1,720 kcal</span>
+        </div>
+        <div class="stat-item">
+          <span class="label">Maintenance TDEE</span>
+          <span id="res-tdee" class="val">2,500 kcal</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Macros Section -->
+    <section class="card">
+      <h2 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 0.4rem;">
+        Recommended Macronutrient Split
+      </h2>
+      <p style="font-size: 0.85rem; color: #64748b;">
+        Optimized by body weight to preserve lean tissue and sustain energy:
+      </p>
+
+      <div class="macros-grid">
+        <div class="macro-card protein">
+          <div class="macro-name" style="color: var(--protein-color);">🥩 Protein</div>
+          <div id="macro-protein-g" class="macro-grams">150 g</div>
+          <div id="macro-protein-kcal" class="macro-kcal">600 kcal (28%)</div>
+        </div>
+
+        <div class="macro-card carbs">
+          <div class="macro-name" style="color: var(--carbs-color);">🍚 Carbs</div>
+          <div id="macro-carbs-g" class="macro-grams">240 g</div>
+          <div id="macro-carbs-kcal" class="macro-kcal">960 kcal (45%)</div>
+        </div>
+
+        <div class="macro-card fats">
+          <div class="macro-name" style="color: var(--fats-color);">🥑 Healthy Fats</div>
+          <div id="macro-fats-g" class="macro-grams">65 g</div>
+          <div id="macro-fats-kcal" class="macro-kcal">585 kcal (27%)</div>
+        </div>
+      </div>
+
+      <div class="macro-dist-bar">
+        <div id="seg-protein" class="dist-segment p" style="width: 28%;"></div>
+        <div id="seg-carbs" class="dist-segment c" style="width: 45%;"></div>
+        <div id="seg-fats" class="dist-segment f" style="width: 27%;"></div>
+      </div>
+      <div class="macro-legend">
+        <div><span class="legend-dot" style="background: var(--protein-color);"></span><span id="leg-protein">Protein: 28%</span></div>
+        <div><span class="legend-dot" style="background: var(--carbs-color);"></span><span id="leg-carbs">Carbs: 45%</span></div>
+        <div><span class="legend-dot" style="background: var(--fats-color);"></span><span id="leg-fats">Fats: 27%</span></div>
+      </div>
+    </section>
+
+    <!-- Meal distribution card -->
+    <section class="card">
+      <h2 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 0.5rem;">
+        Suggested Meal Distribution
+      </h2>
+      <div class="meal-row">
+        <span class="meal-name">🥣 Breakfast (25%)</span>
+        <span id="meal-breakfast" class="meal-cals">538 kcal</span>
+      </div>
+      <div class="meal-row">
+        <span class="meal-name">🥗 Lunch (35%)</span>
+        <span id="meal-lunch" class="meal-cals">753 kcal</span>
+      </div>
+      <div class="meal-row">
+        <span class="meal-name">🍎 Snack (15%)</span>
+        <span id="meal-snack" class="meal-cals">323 kcal</span>
+      </div>
+      <div class="meal-row">
+        <span class="meal-name">🍽️ Dinner (25%)</span>
+        <span id="meal-dinner" class="meal-cals">538 kcal</span>
+      </div>
+    </section>
+
+    <!-- Ad Container -->
+    <div class="ad-slot-container" style="margin: 32px auto 24px; padding: 16px; max-width: 728px; background: rgba(125,125,125,0.05); border: 1px dashed rgba(125,125,125,0.2); border-radius: 8px; text-align: center; min-height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <div style="font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Advertisement</div>
+      <ins class="adsbygoogle"
+           style="display:block; width: 100%;"
+           data-ad-client="ca-pub-3381238987477190"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <h2 class="faq-title">Frequently Asked Questions</h2>
+
+      <article class="faq-item">
+        <button type="button" class="faq-question">
+          <span>What is the difference between BMR and TDEE?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          Your Basal Metabolic Rate (BMR) is the baseline number of calories burned while sleeping or resting all day, simply powering your heartbeat, brain, lungs, and cellular regeneration. Your Total Daily Energy Expenditure (TDEE) takes that base and adds all movement, exercise, work, and digestion.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button type="button" class="faq-question">
+          <span>Why is a moderate deficit better than crash dieting?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          Aggressive deficits (-1,000 kcal or more) trigger metabolic adaptation, elevated hunger hormones (ghrelin), fatigue, and significant muscle breakdown. A gradual 350 to 500 calorie deficit creates steady fat loss of 0.7 to 1 lb per week while preserving muscle mass and metabolic health.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button type="button" class="faq-question">
+          <span>How often should I re-calculate my TDEE?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          As you lose weight, your smaller body requires fewer calories to operate. Re-calculate your TDEE every 10 to 15 lbs lost, or if your scale weight remains plateaued for 3 consecutive weeks.
+        </div>
+      </article>
+    </section>
+
+    <!-- Cross Sell Microapps -->
+    <section class="cross-sell">
+      <h3>More Useful Tools by Sebastián Iglesias</h3>
+      <div class="cross-grid">
+        <a href="https://sebiglesias.com.ar/barbell-calculator/" class="cross-card">
+          <span class="cross-icon">🏋️</span>
+          <div class="cross-info">
+            <strong>Barbell Plate Calculator</strong>
+            <span>Olympic bar plate breakdown</span>
+          </div>
+        </a>
+        <a href="https://sebiglesias.com.ar/coffee-ratio/" class="cross-card">
+          <span class="cross-icon">☕</span>
+          <div class="cross-info">
+            <strong>Coffee Brew Ratio</strong>
+            <span>V60, French Press & Aeropress</span>
+          </div>
+        </a>
+        <a href="https://sebiglesias.com.ar/air-fryer-converter/" class="cross-card">
+          <span class="cross-icon">🍗</span>
+          <div class="cross-info">
+            <strong>Air Fryer Converter</strong>
+            <span>Oven temp & time calculator</span>
+          </div>
+        </a>
+        <a href="https://sebiglesias.com.ar/calculadora-calorias/" class="cross-card">
+          <span class="cross-icon">🔥</span>
+          <div class="cross-info">
+            <strong>Versión en Español</strong>
+            <span>Calculadora de Calorías</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 TDEE Calculator — Built by <a href="https://sebiglesias.com.ar">Sebastián Iglesias</a>.</p>
+    <p style="margin-top: 0.25rem; font-size: 0.75rem;">Nutritional estimations are for informational guidance. Consult a medical professional or registered dietitian for specialized health needs.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

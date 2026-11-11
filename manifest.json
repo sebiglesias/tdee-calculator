@@ -1,0 +1,17 @@
+{
+  "name": "TDEE Calculator — Total Daily Energy Expenditure & Macro Tracker",
+  "short_name": "TDEE Calculator",
+  "description": "Accurately calculate your Total Daily Energy Expenditure (TDEE), Basal Metabolic Rate (BMR), calorie deficit for fat loss, and daily macronutrient split.",
+  "start_url": "/tdee-calculator/",
+  "display": "standalone",
+  "background_color": "#3730a3",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

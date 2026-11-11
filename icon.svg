@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="tdeeBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="100%" stop-color="#3730a3"/>
+    </linearGradient>
+    <linearGradient id="flameGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </linearGradient>
+    <linearGradient id="flameCenter" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="110" fill="url(#tdeeBg)"/>
+  
+  <!-- Outer Flame White Glow -->
+  <path d="M256 75 C240 145 180 185 150 245 C120 305 130 385 190 425 C240 455 310 445 350 395 C390 345 390 265 340 215 C330 255 300 275 280 275 C270 215 290 145 256 75 Z" fill="#ffffff" filter="drop-shadow(0 14px 28px rgba(0,0,0,0.25))"/>
+  
+  <!-- Middle Flame -->
+  <path d="M256 120 C245 175 195 210 170 260 C145 310 155 375 205 405 C245 430 305 420 335 380 C365 340 365 270 325 230 C315 265 290 280 275 280 C265 230 280 175 256 120 Z" fill="url(#flameGrad)"/>
+
+  <!-- Core Flame Spark -->
+  <path d="M256 220 C245 255 220 280 205 315 C195 345 205 380 235 395 C260 410 295 400 310 375 C325 350 320 315 295 295 C290 310 280 320 270 320 C265 285 275 250 256 220 Z" fill="url(#flameCenter)"/>
+</svg>
