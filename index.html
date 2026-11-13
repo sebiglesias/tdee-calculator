@@ -19,6 +19,17 @@
   <meta name="description" content="Free and accurate TDEE Calculator (Total Daily Energy Expenditure). Discover your Basal Metabolic Rate (BMR), calorie deficit for weight loss, and customized daily protein, carb, and fat macros.">
   <meta name="keywords" content="tdee calculator, calorie deficit calculator, bmr calculator, macro calculator, how many calories should i eat, maintenance calories calculator">
   <link rel="canonical" href="https://sebiglesias.com.ar/tdee-calculator/">
+  <link rel="alternate" hreflang="en" href="https://sebiglesias.com.ar/tdee-calculator/">
+  <link rel="alternate" hreflang="es" href="https://sebiglesias.com.ar/tdee-calculator/?lang=es">
+  <link rel="alternate" hreflang="de" href="https://sebiglesias.com.ar/tdee-calculator/?lang=de">
+  <link rel="alternate" hreflang="fr" href="https://sebiglesias.com.ar/tdee-calculator/?lang=fr">
+  <link rel="alternate" hreflang="it" href="https://sebiglesias.com.ar/tdee-calculator/?lang=it">
+  <link rel="alternate" hreflang="pt" href="https://sebiglesias.com.ar/tdee-calculator/?lang=pt">
+  <link rel="alternate" hreflang="nl" href="https://sebiglesias.com.ar/tdee-calculator/?lang=nl">
+  <link rel="alternate" hreflang="sv" href="https://sebiglesias.com.ar/tdee-calculator/?lang=sv">
+  <link rel="alternate" hreflang="da" href="https://sebiglesias.com.ar/tdee-calculator/?lang=da">
+  <link rel="alternate" hreflang="pl" href="https://sebiglesias.com.ar/tdee-calculator/?lang=pl">
+  <link rel="alternate" hreflang="x-default" href="https://sebiglesias.com.ar/tdee-calculator/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -107,6 +118,18 @@
 <body>
 
   <header class="top-bar">
+<div style='display:flex;justify-content:flex-end;margin-bottom:.5rem'><select id="lang-select" aria-label="Language" style="background:#24221C;border:1px solid rgba(242,239,230,.18);color:#F2EFE6;font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:3px 6px;border-radius:3px;cursor:pointer;margin-left:auto">
+  <option value="en">🇺🇸 EN</option>
+  <option value="es">🇪🇸 ES</option>
+  <option value="de">🇩🇪 DE</option>
+  <option value="fr">🇫🇷 FR</option>
+  <option value="it">🇮🇹 IT</option>
+  <option value="pt">🇵🇹 PT</option>
+  <option value="nl">🇳🇱 NL</option>
+  <option value="sv">🇸🇪 SV</option>
+  <option value="da">🇩🇰 DA</option>
+  <option value="pl">🇵🇱 PL</option>
+</select></div>
     <div class="top-bar-inner">
       <a href="https://sebiglesias.com.ar/" class="back-link">
         ← Back to sebiglesias.com.ar
@@ -398,5 +421,41 @@
   </footer>
 
   <script src="app.js"></script>
+
+<script>
+/* I18N_AUTO_ENGINE */
+(function(){
+  const DICT = {"en": {"title": "TDEE & Macro Calculator<span class='accent'>.</span>", "sub": "Mifflin-St Jeor BMR, daily calorie burn & protein/carb/fat macro split"}, "es": {"title": "Calculadora TDEE, Calorías y Macros<span class='accent'>.</span>", "sub": "Gasto energético diario total, tasa metabólica basal y déficit/superávit"}, "de": {"title": "TDEE Kalorien- & Makrorechner<span class='accent'>.</span>", "sub": "Grundumsatz, Leistungsumsatz und optimale Verteilung von Protein, Carbs & Fett"}, "fr": {"title": "Calculateur TDEE, Besoins Caloriques & Macros<span class='accent'>.</span>", "sub": "Métabolisme de base, dépense journalière et répartition protéines/glucides/lipides"}, "it": {"title": "Calcolatore TDEE, Fabbisogno Calorico e Macro<span class='accent'>.</span>", "sub": "Metabolismo basale, calorie giornaliere e grammi di proteine, carbo e grassi"}, "pt": {"title": "Calculadora TDEE, Gasto Calórico e Macros<span class='accent'>.</span>", "sub": "Taxa metabólica basal, calorias para secar ou ganhar massa e macronutrientes"}, "nl": {"title": "TDEE Caloriebehoefte & Macro Calculator<span class='accent'>.</span>", "sub": "Bereken ruststofwisseling (BMR), dagelijkse verbranding en eiwit/koolhydraat/vet"}, "sv": {"title": "TDEE Kalori- & Makrokalkylator<span class='accent'>.</span>", "sub": "Beräkna BMR, dagligt energibehov och fördelning av protein, kolhydrater & fett"}, "da": {"title": "TDEE Kalorie- & Makroberegner<span class='accent'>.</span>", "sub": "Beregn ligevægtsindtag, basalstofskifte og fordeling af makronæringsstoffer"}, "pl": {"title": "Kalkulator TDEE, Kalorii i Makroskładników<span class='accent'>.</span>", "sub": "Oblicz BMR, dzienne zapotrzebowanie kaloryczne oraz białka, tłuszcze i węglowodany"}};
+  const h1El = document.querySelector('h1');
+  const subEl = document.querySelector('.sub') || document.querySelector('header p');
+  const selEl = document.getElementById('lang-select');
+  function applyLang(lang) {
+    const entry = DICT[lang] || DICT.en;
+    document.documentElement.lang = lang;
+    if (h1El && entry.title) h1El.innerHTML = entry.title;
+    if (subEl && entry.sub) subEl.textContent = entry.sub;
+    if (lang !== 'en' && entry.sub) {
+      document.title = (h1El ? h1El.textContent : '') + ' — ' + entry.sub;
+    }
+  }
+  const params = new URLSearchParams(window.location.search);
+  const init = params.get('lang') || localStorage.getItem('tdee-calculator-lang') || 'en';
+  const valid = DICT[init] ? init : 'en';
+  if (selEl) {
+    selEl.value = valid;
+    selEl.addEventListener('change', function(e) {
+      const nl = e.target.value;
+      localStorage.setItem('tdee-calculator-lang', nl);
+      const u = new URL(window.location.href);
+      if (nl === 'en') u.searchParams.delete('lang');
+      else u.searchParams.set('lang', nl);
+      window.history.replaceState({}, '', u);
+      applyLang(nl);
+    });
+  }
+  applyLang(valid);
+})();
+</script>
+
 </body>
 </html>
